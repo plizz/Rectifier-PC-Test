@@ -18,30 +18,33 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp">
+    <ClCompile Include="RectifierSerial.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Serial.cpp">
+    <ClCompile Include="RectifierParser.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="RectifierParse.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="RectifierInfoParse.cpp">
+    <ClCompile Include="RectifierInfoParser.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ReadWriteUtility.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Serial.h">
+    <ClInclude Include="RectifierSerial.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RectifierParserDefs.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="RectifierParser.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="RectifierInfoParse.h">
+    <ClInclude Include="RectifierInfoParser.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="ReadWriteUtility.h">

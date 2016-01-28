@@ -1,9 +1,12 @@
-#pragma once
+#ifndef H_RECTIFIER_PARSER
+#define H_RECTIFIER_PARSER
 
-#include "Serial.h"
-#include <cmath>
-#include "ReadWriteUtility.h"
-#include "RectifierInfoParse.h"
+#include <cstring>
+#include <stdint.h>
+#include "RectifierSerial.h"
+#include "RectifierInfoParser.h"
+
+#define SEND_MESSAGE_LENGTH 32
 
 #define MIN_VOLTS	190U
 #define MAX_VOLTS	290U
@@ -22,31 +25,40 @@ struct RectifierFrame {
 
 class RectifierParser {
 public:
-	RectifierParser();
+	RectifierParser(const std::string com_port_name, uint32_t baudRate);
 	~RectifierParser();
-	uint8_t parse();
+	int16_t getAnswer();
 	void* getData();
 	
-	size_t send(std::string command);
+	void send();
 	// Arguments: cid - command code
 	//            address - module address
 	//			  length - cid + info length
-	//			  info info part of message
-	// Return:    command string
-	const std::string buildSimpleIssuedMessage(uint8_t cid, uint8_t address, std::string info = "");
+	//			  info - info part of message
+  //        infoLength length of info
+	// Return:    void
+	void buildSimpleIssuedMessage(char cid, uint8_t address, char* info = NULL, uint8_t infoLength = 0);
 	// Arguments: cid - command code
 	//            address - module address
-	//			  isOn - true - power on; false - power off
-	// Return:    command string
-	const std::string buildControlOnOffMessage(uint8_t address, bool isOn);
+	//			      isOn - true - power on; false - power off
+	// Return:    void
+	void buildControlOnOffMessage(uint8_t address, bool isOn);
 	// Arguments: address - module address
-	//			  volts
-	//			  amps
-	// Return:    command string
-	const std::string buildSetVoltageAndCurrentMessage(uint8_t address, double volts, double amps);
+	//			      volts
+	//			      amps
+	// Return:    void
+	void buildSetVoltageAndCurrentMessage(uint8_t address, double volts, double amps);
+  uint16_t getErrorCounter();
+  uint16_t getParseCounter();
 private:
-	Serial serial_;
+  char sendMessage_[SEND_MESSAGE_LENGTH];
+  uint8_t sendMessageLength_;
+	RectifierSerial serial_;
 	RectifierFrame frame_;
 	RectifierInfoParser* parser_;
 	void* pParsedMesage_;
+  uint16_t errorCounter_;
+  uint16_t parseCounter_;
 };
+
+#endif	// H_RECTIFIER_PARSER

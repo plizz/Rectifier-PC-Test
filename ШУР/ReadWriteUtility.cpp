@@ -1,10 +1,14 @@
 #include "ReadWriteUtility.h"
 
-void checkByte(uint8_t expected, const char*& data, uint16_t& length) {
+bool checkByte(uint8_t expected, const char*& data, uint16_t& length) {
+    bool result = true;
 	if (length < 1U || expected != *data)
-		throw "checkByte Error";
-	data++;
-	length--;
+		result = false;
+    else {
+        data++;
+        length--;
+    }
+    return result;
 }
 
 int bcdToInt(uint16_t n, uint8_t* data) {
@@ -28,15 +32,16 @@ int readFromBufLe(uint8_t* pValueArray, uint16_t valueSize, const char*& data, u
 		}
 		*pValueArray++ = *(data++);
 	}
-
+  
 	// convert if BCD
 	if (isBcd) {
-		int a = bcdToInt(oldValueSize, pOldValueArray);
+		uint16_t a = bcdToInt(oldValueSize, pOldValueArray);
 		memcpy(pOldValueArray, &a, oldValueSize);
 	}
 	return 0;
 }
 
-uint8_t decToBcd(uint8_t dec) {
+char decToBcd(uint8_t dec) {
+  dec = dec % 100;
 	return (dec / 10) * 16 + (dec % 10);
 }

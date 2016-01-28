@@ -85,15 +85,16 @@
   <ItemGroup>
     <ClCompile Include="main.cpp" />
     <ClCompile Include="ReadWriteUtility.cpp" />
-    <ClCompile Include="RectifierInfoParse.cpp" />
-    <ClCompile Include="RectifierParse.cpp" />
-    <ClCompile Include="Serial.cpp" />
+    <ClCompile Include="RectifierInfoParser.cpp" />
+    <ClCompile Include="RectifierParser.cpp" />
+    <ClCompile Include="RectifierSerial.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ReadWriteUtility.h" />
-    <ClInclude Include="RectifierInfoParse.h" />
+    <ClInclude Include="RectifierInfoParser.h" />
     <ClInclude Include="RectifierParser.h" />
-    <ClInclude Include="Serial.h" />
+    <ClInclude Include="RectifierParserDefs.h" />
+    <ClInclude Include="RectifierSerial.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
